@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="images/logo1.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/navbar.css">
+    <link rel="stylesheet" href="styles/footer.css">
+    <title>Feedback - CalDraw</title>
+</head>
+<body>
+    <div class="page-container">
+        <!-- Fixed Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" href="/">
+                    <img src="images/logo1.png" alt="DrawCal Logo" height="30" class="me-2">
+                    <span class="fw-semibold">DrawCal</span>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                        <!-- Removed me-auto from navbar-nav to allow right alignment -->
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="dashboard.html">
+                                    <i class=></i> Dashboard
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="about.html">
+                                    <i class=></i> About
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="feedback.html">
+                                    <i class=></i> Feedback
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+        <!-- Add spacing for fixed navbar -->
+        <div class="navbar-spacing"></div>
+
+        <!-- Main content wrapper -->
+        <main class="main-content">
+            <div class="container py-4">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <h2 class="h4 mb-4">Share Your Feedback</h2>
+                                <form id="feedbackForm">
+                                    <div class="mb-4">
+                                        <label for="name" class="form-label">Name</label>
+                                        <input type="text" class="form-control" id="name" required>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="email" required>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="feedbackType" class="form-label">Feedback Type</label>
+                                        <select class="form-select" id="feedbackType" required>
+                                            <option value="">Select type...</option>
+                                            <option value="suggestion">Suggestion</option>
+                                            <option value="bug">Bug Report</option>
+                                            <option value="compliment">Compliment</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="feedbackText" class="form-label">Your Feedback</label>
+                                        <textarea class="form-control" id="feedbackText" rows="5" required></textarea>
+                                        <div class="form-text">Your feedback helps us improve DrawCal.</div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary px-4">
+                                        <i class="bi bi-send me-2"></i>Submit Feedback
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer py-2 bg-white shadow-sm">
+            <div class="container">
+                <div class="row align-items-center g-2">
+                    <div class="col-md-4">
+                        <!-- Left column - empty for balance -->
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <small class="mb-0 text-muted">&copy; 2024 DrawCal. All rights reserved.</small>
+                    </div>
+                    <div class="col-md-4">
+                        <ul class="list-inline mb-0 social-links text-end">
+                            <li class="list-inline-item">
+                                <a href="https://github.com/pratikpatil00005" class="text-dark social-link" target="_blank" title="GitHub">
+                                    <i class="bi bi-github small"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="https://instagram.com/pratik_patil0207" class="text-dark social-link" target="_blank" title="Instagram">
+                                    <i class="bi bi-instagram small"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="https://twitter.com/yourusername" class="text-dark social-link" target="_blank" title="Twitter">
+                                    <i class="bi bi-twitter small"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="scripts/navbar.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/feedbackHandler.js"></script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="images/logo1.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/navbar.css">
+    <link rel="stylesheet" href="styles/footer.css">
+    <link rel="stylesheet" href="styles/theme.css">
+    <title>About - DrawCal</title>
+</head>
+<body>
+    <div class="page-container">
+        <!-- Fixed Navbar -->
+        <nav class="navbar navbar-expand-lg shadow-sm fixed-top">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" href="/">
+                    <img src="images/logo1.png" alt="DrawCal Logo" height="30" class="me-2">
+                    <span>DrawCal</span>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="dashboard.html">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="about.html">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                                <i class="bi bi-sun-fill"></i>
+                            </button>
+                        </li>
+                        <!-- User Profile -->
+                        <li class="nav-item" id="userProfile">
+                            <div class="d-flex align-items-center gap-2">
+                                <img id="userAvatar" src="" alt="User Avatar" class="rounded-circle" width="32" height="32">
+                                <span id="userName" class="d-none d-md-inline"></span>
+                                <div class="dropdown">
+                                    <button class="btn btn-link p-0" type="button" data-bs-toggle="dropdown">
+                                        <i class="bi bi-three-dots-vertical"></i>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li><button id="signOutButton" class="dropdown-item">Sign Out</button></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Add spacing for fixed navbar -->
+        <div class="navbar-spacing"></div>
+
+        <!-- Main content wrapper -->
+        <main class="main-content d-flex align-items-center justify-content-center flex-grow-1">
+            <div class="container py-5">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="card shadow">
+                            <div class="card-body p-4">
+                                <div class="text-center mb-4">
+                                    <img src="images/logo1.png" alt="DrawCal Logo" height="60" class="mb-3">
+                                    <h1 class="h2 mb-3">About DrawCal</h1>
+                                    <p class="text-muted">Version 0.0.5</p>
+                                </div>
+                                
+                                <section class="mb-5">
+                                    <h2 class="h5 fw-bold mb-3">What is DrawCal?</h2>
+                                    <p class="text-secondary">DrawCal is an innovative web application that combines the power of drawing and mathematical calculations. With our advanced handwriting recognition system, you can simply draw mathematical expressions and get instant solutions.</p>
+                                </section>
+
+                                <section class="mb-5">
+                                    <h2 class="h5 fw-bold mb-3">Key Features</h2>
+                                    <div class="row g-4">
+                                        <div class="col-md-6">
+                                            <div class="d-flex align-items-start">
+                                                <i class="bi bi-pen text-primary fs-4 me-3"></i>
+                                                <div>
+                                                    <h3 class="h6 fw-bold">Hand-drawn Input</h3>
+                                                    <p class="small text-secondary">Draw mathematical expressions naturally</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="d-flex align-items-start">
+                                                <i class="bi bi-lightning-fill text-warning fs-4 me-3"></i>
+                                                <div>
+                                                    <h3 class="h6 fw-bold">Instant Results</h3>
+                                                    <p class="small text-secondary">Get calculations in real-time</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="d-flex align-items-start">
+                                                <i class="bi bi-tools text-success fs-4 me-3"></i>
+                                                <div>
+                                                    <h3 class="h6 fw-bold">Multiple Operations</h3>
+                                                    <p class="small text-secondary">Support for various mathematical operations</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="d-flex align-items-start">
+                                                <i class="bi bi-shield-check text-info fs-4 me-3"></i>
+                                                <div>
+                                                    <h3 class="h6 fw-bold">Secure & Private</h3>
+                                                    <p class="small text-secondary">Your data stays private and secure</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <section class="mb-5">
+                                    <h2 class="h5 fw-bold mb-3">Contact Us</h2>
+                                    <div class="d-flex flex-column gap-2">
+                                        <a href="feedback.html" class="btn btn-outline-primary">
+                                            <i class="bi bi-chat-dots me-2"></i>Send Feedback
+                                        </a>
+                                        <a href="mailto:support@drawcal.com" class="btn btn-outline-secondary">
+                                            <i class="bi bi-envelope me-2"></i>Email Support
+                                        </a>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Modified footer with smaller size -->
+        <footer class="footer py-2 bg-white shadow-sm">
+            <div class="container">
+                <div class="row align-items-center g-2">
+                    <div class="col-md-4">
+                        <!-- Left column - empty for balance -->
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <small class="mb-0 text-muted">&copy; 2024 DrawCal. All rights reserved.</small>
+                    </div>
+                    <div class="col-md-4">
+                        <ul class="list-inline mb-0 social-links text-end">
+                            <li class="list-inline-item">
+                                <a href="https://github.com/pratikpatil00005" class="text-dark social-link" target="_blank" title="GitHub">
+                                    <i class="bi bi-github small"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="https://instagram.com/pratik_patil0207" class="text-dark social-link" target="_blank" title="Instagram">
+                                    <i class="bi bi-instagram small"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="https://twitter.com/yourusername" class="text-dark social-link" target="_blank" title="Twitter">
+                                    <i class="bi bi-twitter small"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="scripts/theme.js"></script>  <!-- Add this first -->
+    <script src="scripts/navbar.js"></script>
+    <script src="scripts/authButton.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DrawCal - Main Page</title>
+    <link rel="stylesheet" href="styles/fonts.css">
+    <link rel="stylesheet" href="styles/index.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="images/logo1.png">
+    <link rel="stylesheet" href="styles/theme.css">
+</head>
+<body class="min-h-screen transition-colors bg-gradient-to-br from-blue-50 to-indigo-100 text-gray-800 font-['Excalifont']" data-theme="light">
+    <header class="p-4 fixed w-full top-0 z-50">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center">
+                <img src="images/logo1.png" alt="DrawCal logo" class="h-12 w-14">
+                <span class="text-Grey-600 text-xl font-bold ml-2">DrawCal</span>
+            </div>
+            <button id="themeToggle" class="p-2 rounded-full hover:bg-opacity-10 hover:bg-gray-600">
+                <i class="bi bi-sun-fill text-xl"></i>
+            </button>
+        </div>
+    </header>
+
+        <!-- Add spacing for fixed navbar -->
+    <div class="navbar-spacing"></div>
+
+    <main class="flex flex-col items-center justify-center text-center mt-20">
+        <h1 class="text-6xl text-Grey-600 font-bold mb-4">Welcome to DrawCal</h1>
+        <p class="text-2xl text-gray-700 font-medium mb-12">Hands on Canvas</p>
+        <div class="flex space-x-6">
+            <div class="bg-white shadow-lg rounded-lg p-6 w-64">
+                <h2 class="text-xl text-Grey-600 font-bold mb-2">Get Started</h2>
+                <a href="login.html">
+                    <button type="button" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg transition duration-200">Login</button>
+                </a>
+                <p class="text-gray-600 mt-2">Free access to DrawCal V0.0.5!</p>
+            </div>
+            <div class="bg-white shadow-lg rounded-lg p-6 w-64">
+                <h2 class="text-xl text-Grey-600 font-bold mb-2">About DrawCal</h2>
+                <p class="text-gray-600">DrawCal is an innovative web application that combines the power of drawing and mathematical calculations.!</p>
+            </div>
+        </div>
+    </main>
+    <script src="scripts/theme.js"></script>
+</body>
+</html>

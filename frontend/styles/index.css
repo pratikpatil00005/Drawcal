@@ -1,0 +1,21 @@
+header {
+    background: rgba(242, 242, 242, 0.274) !important;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+    min-height: 48px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo {
+    font-size: 1.4rem;
+}
+
+.navbar-spacing {
+    height: px;
+}
+
+body {
+    background: linear-gradient(to bottom right, #f0f7ff, #e8eaff);
+    min-height: 100vh;
+}

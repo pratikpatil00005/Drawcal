@@ -1,0 +1,44 @@
+:root {
+    /* Light theme */
+    --navbar-height: 60px;
+    --primary-color: #0d6efd;
+    --primary-color-transparent: rgba(13, 110, 253, 0.2);
+    --text-color: #212529;
+    --text-color-secondary: #6c757d;
+    --border-color: #dee2e6;
+    --canvas-bg: #ffffff;
+    --tools-bg: #ffffff;
+    --tool-btn-bg: #ffffff;
+    --floating-bg: rgba(255, 255, 255, 0.9);
+    --controls-bg: rgba(255, 255, 255, 0.9);
+    --hover-bg: #f3f4f6;
+    --canvas-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    --floating-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --surface-color: #ffffff;
+    --surface-color-elevated: #f8f9fa;
+    --input-bg: #ffffff;
+}
+
+[data-theme="dark"] {
+    --text-color: #e5e7eb;
+    --border-color: #374151;
+    --canvas-bg: #1f2937;
+    --tools-bg: #111827;
+    --tool-btn-bg: #1f2937;
+    --floating-bg: rgba(17, 24, 39, 0.9);
+    --controls-bg: rgba(17, 24, 39, 0.9);
+    --hover-bg: #374151;
+    --canvas-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    --floating-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+    .tools-panel {
+        width: 240px;
+    }
+    
+    .floating-tools {
+        flex-wrap: wrap;
+        max-width: calc(100% - 2rem);
+    }
+}

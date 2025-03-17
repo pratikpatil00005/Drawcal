@@ -1,0 +1,3726 @@
+/* Theme Variables */
+:root {
+    --nav-height: 60px;
+    --primary-color: #2563eb;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --border-color: #e2e8f0;
+    --shadow-color: rgba(0, 0, 0, 0.08);
+    --highlight-color: #dbeafe;
+    --highlight-border: #60a5fa;
+    --toolbar-bg: rgba(248, 250, 252, 0.95);
+    --canvas-bg: #ffffff;
+    --floating-bg: rgba(255, 255, 255, 0.95);
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+    --bg-primary: #121212;
+    --bg-secondary: #1e1e1e;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0a0;
+    --border-color: #2d2d2d;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --canvas-bg: #1f2937;
+    --floating-bg: rgba(17, 24, 39, 0.9);
+}
+
+/* Global Styles */
+*, *::before, *::after {
+    transition: background-color 0.3s ease,
+                border-color 0.3s ease,
+                color 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+@font-face {
+    font-family: 'Excalifont';
+    src: url('../fonts/Excalifont-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    padding-top: var(--nav-height);
+}
+
+/* Apply Excalifont to headings and brand */
+.navbar-brand span,
+.section-title,
+.card-header {
+    font-family: 'Excalifont', sans-serif;
+}
+
+/* Layout */
+.page-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+}
+
+/* Utility Classes */
+.shadow-hover {
+    transition: box-shadow 0.3s ease;
+}
+
+.shadow-hover:hover {
+    box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 768px) {
+    .main-content-wrapper {
+        padding: 0.5rem;
+    }
+}
+
+.logo {
+    font-size: 1.75rem;
+}
+
+.nav-link {
+    position: relative;
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--bs-primary);
+    border-radius: 2px;
+}
+
+#canvas {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4/3;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    cursor: crosshair;
+    touch-action: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.btn-icon {
+    font-size: 0.9em;
+    margin-right: 0.25rem;
+}
+
+@media (max-width: 768px) {
+    #canvas {
+        width: 100%;
+        height: auto;
+    }
+}
+
+/* Footer Styles */
+.footer {
+    margin-top: 3rem;
+    position: relative;
+}
+
+.social-links {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: #f8f9fa;
+    transition: all 0.2s ease;
+}
+
+.social-link:hover {
+    color: #fff !important;
+    background-color: var(--bs-primary);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .social-links {
+        justify-content: center;
+        margin-top: 1rem;
+    }
+    
+    .footer .text-end {
+        text-align: center !important;
+    }
+}
+
+/* User Profile Styles */
+.dropdown-toggle::after {
+    margin-left: 0.5rem;
+}
+
+.dropdown-toggle:hover {
+    text-decoration: none;
+}
+
+#userProfile .dropdown-toggle {
+    padding: 0.375rem;
+}
+
+#userProfile img {
+    object-fit: cover;
+}
+
+/* Add Bootstrap Icons */
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css");
+
+
+/* Toolbox Styles */
+.toolbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background: var(--bg-secondary);
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    margin-bottom: 1rem;
+}
+
+.toolbox button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 0.375rem;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+}
+
+.toolbox button:hover {
+    background-color: #f3f4f6;
+    border-color: #e5e7eb;
+}
+
+.toolbox button.active {
+    background-color: #e0e7ff;
+    border-color: #818cf8;
+    color: #4f46e5;
+}
+
+.toolbox button i {
+    font-size: 1.25rem;
+}
+
+/* Update canvas container for new layout */
+.canvas-container {
+    text-align: center;
+    max-width: 800px; /* Reduced max-width */
+    margin: 0 auto;
+    padding: 1rem;
+    background: var(--bg-primary);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    position: relative;
+}
+
+/* Toolbox Panel Styles - Enhanced */
+.toolbox-panel {
+    display: none !important;
+}
+
+/* Mobile adjustments for toolbox shadow */
+@media (max-width: 768px) {
+    .toolbox-panel {
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.12); /* Adjusted shadow for mobile */
+        border-radius: 20px 20px 0 0;
+        position: fixed;
+        left: 0;
+        top: var(--nav-height);
+        height: calc(100vh - var(--nav-height));
+        z-index: 1001;
+        transform: translateX(-100%);
+    }
+
+    .toolbox-panel.expanded {
+        transform: translateX(0);
+    }
+
+    .tool-section {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); /* Lighter shadow for nested elements */
+    }
+}
+
+/* Tool Box Title Styling */
+.tool-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin: 0;
+    padding: 0.5rem 0;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+/* Color Palette - Enhanced */
+.color-palette {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.375rem;
+    padding: 0.25rem;
+}
+
+.color-btn {
+    width: 24px;
+    height: 24px;
+    border: 2px solid #ffffff;
+    border-radius: 4px;
+    box-shadow: 0 0 0 1px #e5e7eb;
+    transition: all 0.2s ease;
+}
+
+.color-btn:hover {
+    transform: scale(1.1);
+}
+
+.color-btn.active {
+    border-color: #ffffff;
+    box-shadow: 0 0 0 2px #3b82f6;
+}
+
+/* Tools Grid - Enhanced */
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.375rem;
+    padding: 0.25rem;
+}
+
+.tool-btn {
+    width: 32px;
+    height: 32px;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    background: #ffffff;
+    font-size: 0.875rem;
+    color: #4b5563;
+    transition: all 0.2s ease;
+}
+
+.tool-btn:hover {
+    background: #f3f4f6;
+    border-color: #d1d5db;
+}
+
+.tool-btn.active {
+    background: #eff6ff;
+    color: #2563eb;
+    border-color: #60a5fa;
+}
+
+/* Range Input Styling - Enhanced */
+.form-range {
+    height: 20px;
+    padding: 0;
+}
+
+.form-range::-webkit-slider-thumb {
+    width: 12px;
+    height: 12px;
+    background: #3b82f6;
+    border: 2px solid #ffffff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.form-range::-webkit-slider-runnable-track {
+    height: 3px;
+    background: #e5e7eb;
+    border-radius: 1.5px;
+}
+
+/* Scrollbar Styling */
+.toolbox-panel::-webkit-scrollbar {
+    width: 6px;
+}
+
+.toolbox-panel::-webkit-scrollbar-track {
+    background: #f8fafc;
+}
+
+.toolbox-panel::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+    transition: background 0.2s ease;
+}
+
+.toolbox-panel::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* Canvas Wrapper */
+.canvas-wrapper {
+    padding: 1.5rem;
+    height: calc(100vh - var(--nav-height));
+    overflow-y: auto;
+}
+
+/* Canvas Container */
+.canvas-container {
+    width: 100%;
+    max-width: 800px; /* Reduced max-width */
+    margin: 0 auto;
+    padding: 1rem;
+    background: var(--bg-primary);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+#canvas {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4/3;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    cursor: crosshair;
+    touch-action: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Answer Container */
+.answer-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .toolbox-panel {
+        width: 100%;
+        height: auto;
+        max-height: 50vh;
+        border-right: none;
+        border-top: 1px solid #e5e7eb;
+        padding: 0.75rem;
+    }
+
+    .tool-section {
+        margin-bottom: 0.75rem;
+        padding: 0.75rem;
+    }
+
+    .color-palette {
+        grid-template-columns: repeat(8, 1fr);
+    }
+
+    .tools-grid {
+        grid-template-columns: repeat(6, 1fr);
+        gap: 0.25rem;
+    }
+
+    .tool-btn {
+        width: 36px;
+        height: 36px;
+    }
+
+    .color-btn {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+/* Mobile Responsive Improvements */
+@media (max-width: 768px) {
+    .container-fluid {
+        padding: 0;
+    }
+
+    .canvas-wrapper {
+        padding: 0.5rem;
+        height: auto;
+    }
+
+    .canvas-container {
+        margin: 0;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+    }
+
+    #canvas {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .toolbox-panel {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: auto;
+        max-height: 40vh;
+        z-index: 1000;
+        padding: 0.75rem;
+        border-top: 1px solid #dee2e6;
+        border-right: none;
+        overflow-y: auto;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+    }
+
+    .tool-section {
+        margin-bottom: 1rem;
+        padding: 0.75rem;
+    }
+
+    .tools-grid {
+        grid-template-columns: repeat(6, 1fr);
+        gap: 0.5rem;
+    }
+
+    .color-palette {
+        grid-template-columns: repeat(6, 1fr);
+        gap: 0.5rem;
+    }
+
+    .toolbar-horizontal {
+        position: sticky;
+        top: var(--nav-height);
+        background: white;
+        z-index: 999;
+        padding: 0.5rem;
+        margin: 0;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .answer-container {
+        margin: 1rem;
+    }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+    .tools-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .toolbar-horizontal {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .toolbar-horizontal .btn-group {
+        width: 100%;
+        display: flex;
+    }
+
+    .toolbar-horizontal .btn {
+        flex: 1;
+    }
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+    .toolbox-panel {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: auto;
+        max-height: 45vh;
+        z-index: 1000;
+        padding: 0.75rem;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(10px);
+        transition: transform 0.3s ease;
+        border-radius: 20px 20px 0 0;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.12); /* Adjusted shadow for mobile */
+    }
+
+    .toolbox-collapsed {
+        transform: translateY(calc(100% - 40px));
+    }
+
+    .tools-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+    }
+
+    .tool-btn {
+        padding: 8px;
+        font-size: 1.1rem;
+    }
+
+    .canvas-wrapper {
+        padding-bottom: 45vh;
+    }
+
+    .navbar {
+        padding: 0.5rem;
+    }
+
+    .toolbar-horizontal {
+        position: sticky;
+        top: var(--nav-height);
+        background: white;
+        z-index: 999;
+        padding: 0.5rem;
+        display: flex;
+        gap: 0.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .toolbar-horizontal .btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    /* Enhanced touch targets */
+    .color-btn {
+        width: 40px;
+        height: 40px;
+    }
+
+    .form-range {
+        height: 40px;
+        padding: 1rem 0.5rem;
+    }
+
+    .form-range::-webkit-slider-thumb {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+    .tools-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .color-palette {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .toolbar-horizontal {
+        flex-direction: column;
+    }
+
+    .toolbar-horizontal .btn-group {
+        width: 100%;
+    }
+}
+
+/* Mobile Toolbox Improvements */
+@media (max-width: 768px) {
+    .toolbox-panel {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: auto;
+        max-height: 60vh;
+        z-index: 1000;
+        padding: 0;
+        background: #ffffff;
+        border-radius: 20px 20px 0 0;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.12); /* Adjusted shadow for mobile */
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transform: translateY(0);
+    }
+
+    .toolbox-handle {
+        width: 100%;
+        padding: 12px 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: grab;
+        touch-action: none;
+        user-select: none;
+    }
+
+    .toolbox-handle::before {
+        content: '';
+        width: 40px;
+        height: 4px;
+        background: #cbd5e1;
+        border-radius: 4px;
+    }
+
+    .toolbox-content {
+        padding: 0 16px 16px 16px;
+        overflow-y: auto;
+        max-height: calc(60vh - 40px);
+        scrollbar-width: thin;
+    }
+
+    .tool-section {
+        margin-bottom: 12px;
+        padding: 12px;
+        border-radius: 8px;
+        background: #f8fafc;
+        border: none;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); /* Lighter shadow for nested elements */
+    }
+
+    .toolbox-collapsed {
+        transform: translateY(calc(100% - 40px));
+    }
+
+    .toolbox-collapsed .toolbox-content {
+        visibility: hidden;
+    }
+
+    .tools-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+    }
+
+    .tool-btn {
+        padding: 12px;
+        aspect-ratio: 1;
+        font-size: 1.1rem;
+    }
+
+    .color-palette {
+        grid-template-columns: repeat(6, 1fr);
+        gap: 8px;
+    }
+
+    /* Improve touch targets */
+    .tool-btn, .color-btn {
+        min-width: 44px;
+        min-height: 44px;
+    }
+
+    /* Add momentum scrolling */
+    .toolbox-content {
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* Enhanced Mobile Optimizations */
+@media (max-width: 768px) {
+    .toolbox-panel {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: auto;
+        max-height: 65vh;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(12px);
+        border-radius: 24px 24px 0 0;
+        box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.12);
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .quick-tools {
+        position: fixed;
+        left: 50%;
+        bottom: 20px;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 16px;
+        padding: 12px 20px;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(10px);
+        border-radius: 50px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        z-index: 1001;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .quick-tools.hidden {
+        transform: translate(-50%, 150%);
+        opacity: 0;
+    }
+
+    .quick-tool-btn {
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        border: none;
+        background: white;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+        color: #4b5563;
+        transition: all 0.2s ease;
+    }
+
+    .quick-tool-btn[data-tool="undo"] i,
+    .quick-tool-btn[data-tool="redo"] i {
+        color: #6b7280;
+        font-size: 1.1rem;
+    }
+
+    .quick-tool-btn[data-tool="clear"] i {
+        color: #ef4444;
+    }
+
+    .quick-tool-btn[data-tool="generate"] i {
+        color: #3b82f6;
+    }
+
+    .quick-tool-btn:active {
+        transform: scale(0.9);
+        background: #f0f9ff;
+    }
+
+    .quick-tools {
+        position: fixed;
+        left: 50%;
+        bottom: calc(65vh + 16px);
+        transform: translateX(-50%);
+        display: flex;
+        gap: 12px;
+        padding: 8px 16px;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(8px);
+        border-radius: 50px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        z-index: 1001;
+        transition: transform 0.3s ease;
+    }
+
+    .quick-tools.hidden {
+        transform: translate(-50%, 150%);
+    }
+
+    .quick-tool-btn {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        border: none;
+        background: white;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+        color: #4b5563;
+        transition: all 0.2s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .quick-tool-btn:active,
+    .quick-tool-btn.active {
+        transform: scale(0.9);
+        background: #f0f9ff;
+    }
+
+    .quick-tool-btn::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 100%;
+        background: currentColor;
+        border-radius: 50%;
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0);
+        transition: transform 0.4s ease, opacity 0.3s ease;
+    }
+
+    .quick-tool-btn:active::after {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0.1;
+    }
+
+    .toolbox-handle {
+        position: relative;
+        width: 100%;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: grab;
+    }
+
+    .toolbox-handle::before {
+        content: '';
+        width: 36px;
+        height: 4px;
+        background: #cbd5e1;
+        border-radius: 2px;
+        transition: width 0.3s ease;
+    }
+
+    .toolbox-handle:active::before {
+        width: 44px;
+    }
+
+    .tool-section {
+        background: #f8fafc;
+        border-radius: 16px;
+        padding: 16px;
+        margin: 8px 16px;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); /* Lighter shadow for nested elements */
+    }
+
+    .tool-btn, .color-btn {
+        min-width: 48px;
+        min-height: 48px;
+        touch-action: none;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .tool-btn::after, .color-btn::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 100%;
+        background: currentColor;
+        border-radius: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+        transition: transform 0.4s ease, opacity 0.3s ease;
+    }
+
+    .tool-btn:active::after, .color-btn:active::after {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0.1;
+    }
+
+    /* Improved scrolling */
+    .toolbox-content {
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    .toolbox-content::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Canvas adjustments */
+    .canvas-container {
+        margin-bottom: 65vh;
+    }
+
+    /* Enhanced touch feedback */
+    .btn {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 100%;
+        background: currentColor;
+        border-radius: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+        transition: transform 0.4s ease, opacity 0.3s ease;
+    }
+
+    .btn:active::after {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0.1;
+    }
+
+    /* Improve canvas touch interaction */
+    #canvas {
+        touch-action: none;
+        -webkit-user-select: none;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .canvas-container {
+        overflow: hidden;
+        touch-action: none;
+        margin-bottom: 100px;
+    }
+
+    .toolbar-horizontal {
+        display: none !important;
+    }
+
+    .canvas-container {
+        height: 70vh; /* Increased height */
+        margin: 0;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #canvas {
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    .canvas-wrapper {
+        padding: 0.5rem;
+        height: calc(100vh - var(--nav-height));
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Adjust spacing for quick tools */
+    .quick-tools {
+        position: fixed;
+        left: 50%;
+        bottom: 30px;
+        transform: translateX(-50%);
+        z-index: 1002;
+    }
+
+    /* Adjust answer container spacing */
+    .answer-container {
+        margin-top: 1rem;
+        padding: 0 1rem;
+    }
+
+    /* Remove previous margin-bottom */
+    .canvas-container {
+        margin-bottom: 0;
+    }
+}
+
+/* Question Input Container */
+.question-input-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.question-input-container .input-group {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.question-input-container .form-control {
+    border: 1px solid #dee2e6;
+    padding: 0.75rem;
+    font-size: 1rem;
+}
+
+.question-input-container .form-control:focus {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
+}
+
+.question-input-container .input-group-text {
+    border: 1px solid #dee2e6;
+    border-right: none;
+}
+
+.question-input-container small {
+    color: #6c757d;
+    padding-left: 0.5rem;
+}
+
+/* Quick Tools Wrapper */
+.quick-tools-wrapper {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    transform: none;
+    z-index: 1002;
+    width: auto;
+}
+
+.quick-tools {
+    background-color: rgba(255, 255, 255, 0.98);
+    border-radius: 50px;
+    padding: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    display: flex;
+    gap: 8px;
+}
+
+.quick-tool-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    color: #495057;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .quick-tools-wrapper {
+        top: 10px;
+        right: 10px;
+    }
+
+    .quick-tools {
+        padding: 6px;
+        gap: 6px;
+    }
+
+    .quick-tool-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .quick-tools-wrapper {
+        bottom: 25px; /* Increased bottom spacing */
+        width: auto;
+        max-width: 90%;
+    }
+
+    .quick-tools {
+        padding: 8px;
+        gap: 8px;
+    }
+
+    .quick-tool-btn {
+        width: 40px;
+        height: 40px;
+    }
+
+    /* Remove conflicting styles */
+    .quick-tools {
+        position: static;
+        transform: none;
+    }
+}
+
+/* For very small screens */
+@media (max-width: 320px) {
+    .quick-tools {
+        padding: 4px 8px;
+        gap: 6px;
+    }
+
+    .quick-tool-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 0.8rem;
+    }
+}
+
+/* Quick Tool Button States */
+.quick-tool-btn.active {
+    transform: scale(0.9);
+    background: #f0f9ff;
+}
+
+.quick-tool-btn.success {
+    background: #28a745;
+    color: white;
+}
+
+.quick-tool-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Update hover effects */
+.quick-tool-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.quick-tool-btn:active {
+    transform: scale(0.95);
+}
+
+/* Hide quick tools when toolbox is open on mobile */
+@media (max-width: 768px) {
+    .toolbox-panel:not(.toolbox-collapsed) ~ .quick-tools-wrapper {
+        display: none;
+    }
+
+    .quick-tools.hidden {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+}
+
+/* Remove old quick tools styles */
+.quick-tools-desktop, .d-md-none.quick-tools {
+    display: none !important;
+}
+
+/* Desktop Quick Tools */
+.quick-tools-desktop {
+    display: flex;
+    gap: 12px;
+    padding: 12px 24px;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+    border-radius: 50px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.quick-tools .quick-tool-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    color: #4b5563;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.quick-tools .quick-tool-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.quick-tools .quick-tool-btn:active {
+    transform: translateY(0);
+}
+
+.quick-tools .quick-tool-btn.primary {
+    background: #0d6efd;
+    color: white;
+}
+
+.quick-tools .quick-tool-btn.primary:hover {
+    background: #0b5ed7;
+}
+
+/* Hide mobile quick tools on desktop */
+@media (min-width: 768px) {
+    .quick-tools.d-md-none {
+        display: none !important;
+    }
+}
+
+/* Update mobile styles */
+@media (max-width: 768px) {
+    .quick-tools-desktop {
+        display: none;
+    }
+}
+
+/* Layout fixes */
+.container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+    height: calc(100vh - var(--nav-height));
+    overflow: hidden;
+}
+
+.row {
+    margin: 0;
+}
+
+.toolbox-panel {
+    position: sticky;
+    top: 0;
+    height: calc(100vh - var(--nav-height));
+    overflow-y: auto;
+    background: var(--bg-secondary);
+    border-right: 1px solid rgba(0, 0, 0, 0.08);
+    z-index: 1000;
+}
+
+.canvas-wrapper {
+    height: calc(100vh - var(--nav-height));
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .toolbox-panel {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: auto;
+        height: auto;
+        max-height: 60vh;
+        border-radius: 20px 20px 0 0;
+        border-right: none;
+        border-top: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .canvas-wrapper {
+        height: 100%;
+        padding-bottom: 60vh;
+    }
+}
+
+/* Stroke Width and Opacity Controls */
+.control-group {
+    padding: 0.5rem 0.375rem;
+}
+
+.control-group label {
+    font-size: 0.675rem;
+    color: #6b7280;
+    margin-bottom: 0.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.control-value {
+    font-size: 0.675rem;
+    color: #4b5563;
+    font-weight: 500;
+}
+
+/* Value Display */
+.value-display {
+    font-size: 0.75rem;
+    color: #6b7280;
+    text-align: right;
+    margin-top: 0.25rem;
+}
+
+/* Quick Tools Container - New Position */
+.quick-tools-container {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+
+.quick-tools {
+    display: flex;
+    gap: 12px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    border-radius: 50px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.quick-tool-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: none;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: #4b5563;
+    transition: all 0.2s ease;
+}
+
+.quick-tool-btn:hover {
+    transform: translateY(-2px);
+}
+
+.quick-tool-btn:active {
+    transform: scale(0.95);
+}
+
+.quick-tool-btn.danger:hover {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.quick-tool-btn.primary:hover {
+    background: #dbeafe;
+    color: #2563eb;
+}
+
+/* Mobile Optimization */
+@media (max-width: 768px) {
+    .quick-tools-container {
+        bottom: calc(var(--answer-height) + 20px);
+    }
+
+    .quick-tools {
+        padding: 10px;
+        gap: 8px;
+    }
+
+    .quick-tool-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+}
+
+/* Remove old quick tools styles */
+.quick-tools-wrapper {
+    display: none;
+}
+
+/* New Tool Options Styles */
+.text-options {
+    padding: 8px 0;
+}
+
+.text-options select,
+.text-options input {
+    width: 100%;
+}
+
+#insertImage {
+    margin-bottom: 8px;
+}
+
+/* Make tool buttons more visible when active */
+.tool-btn[data-tool="text"].active {
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+}
+
+/* Insert Tools Styling */
+.insert-tools .tool-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+    width: auto;
+    height: auto;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    background: #ffffff;
+    transition: all 0.2s ease;
+}
+
+.insert-tools .tool-btn:hover {
+    background: #f8f9fa;
+    border-color: #ced4da;
+}
+
+.insert-tools .tool-btn.active {
+    background: #e9ecef;
+    border-color: #dee2e6;
+    color: #0d6efd;
+}
+
+.insert-tools .tool-label {
+    font-size: 0.875rem;
+}
+
+.text-options {
+    background: #f8f9fa;
+    border-radius: 6px;
+    padding: 12px;
+    margin-top: 8px;
+}
+
+/* Main Content Layout */
+.main-content-wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    overflow: hidden;
+}
+
+/* Canvas Section */
+.canvas-section {
+    flex: 1;
+    min-height: 0;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.canvas-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    max-width: 800px;
+    max-height: 600px;
+    margin: auto;
+}
+
+#canvas {
+    background: var(--bg-secondary);
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    cursor: crosshair;
+    touch-action: none;
+    -webkit-user-select: none;
+    user-select: none;
+}   
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .canvas-section {
+        padding: 10px;
+    }
+
+    .canvas-container {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 4/3;
+    }
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+    .main-content-wrapper {
+        padding: 0.5rem;
+    }
+
+    .canvas-section {
+        border-radius: 8px;
+    }
+
+    .canvas-container {
+        padding: 10px;
+    }
+
+    .drawing-canvas {
+        border-radius: 4px;
+    }
+}
+
+/* Small Screen Optimizations */
+@media (max-width: 480px) {
+    .canvas-container {
+        padding: 5px;
+    }
+}
+
+/* Answer Section */
+.answer-section {
+    flex: 0 0 auto;
+    max-height: 35vh;
+    overflow-y: auto;
+}
+
+.answer-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Quick Tools Positioning */
+.quick-tools-container {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20px;
+    z-index: 1010;
+    transition: all 0.3s ease;
+}
+
+.quick-tools {
+    display: flex;
+    gap: 12px;
+    padding: 10px 16px;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(8px);
+    border-radius: 50px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.quick-tool-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    color: #4b5563;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    font-size: 1.1rem;
+}
+
+.quick-tool-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.quick-tool-btn:active {
+    transform: scale(0.95);
+}
+
+.quick-tool-btn.danger {
+    color: #dc2626;
+}
+
+.quick-tool-btn.danger:hover {
+    background: #fee2e2;
+}
+
+.quick-tool-btn.primary {
+    color: #2563eb;
+}
+
+.quick-tool-btn.primary:hover {
+    background: #dbeafe;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 767.98px) {
+    .quick-tools-container {
+        bottom: calc(env(safe-area-inset-bottom) + 80px);
+    }
+
+    .quick-tools {
+        padding: 8px 12px;
+        gap: 8px;
+    }
+
+    .quick-tool-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+}
+
+/* Small Screen Optimization */
+@media (max-width: 374.98px) {
+    .quick-tools {
+        padding: 6px 10px;
+        gap: 6px;
+    }
+
+    .quick-tool-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Show/Hide Animation */
+.quick-tools.hidden {
+    opacity: 0;
+    transform: translate(-50%, 100%);
+    pointer-events: none;
+}
+
+/* Active State */
+.quick-tool-btn.active {
+    background: #f3f4f6;
+    transform: scale(0.95);
+}
+
+/* Responsive Adjustments */
+@media (min-width: 992px) {
+    .main-content-wrapper {
+        flex-direction: row;
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+
+    .canvas-section {
+        flex: 1;
+        min-height: unset;
+    }
+
+    .answer-section {
+        flex: 0 0 300px;
+        max-height: unset;
+        height: 100%;
+    }
+
+    .quick-tools-container {
+        bottom: 1.5rem;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .main-content-wrapper {
+        gap: 0.75rem;
+        padding: 0.75rem;
+    }
+
+    .canvas-section {
+        min-height: 50vh;
+    }
+
+    #canvas {
+        max-width: 95%;
+        max-height: 95%;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .main-content-wrapper {
+        padding: 0.5rem;
+    }
+
+    .canvas-section {
+        min-height: 45vh;
+        border-radius: 8px;
+    }
+
+    .quick-tools-container {
+        bottom: 0.75rem;
+    }
+
+    .answer-section {
+        max-height: 40vh;
+    }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .canvas-container {
+        touch-action: none;
+    }
+
+    .quick-tools {
+        padding: 8px;
+    }
+
+    .quick-tool-btn {
+        width: 42px;
+        height: 42px;
+    }
+}
+
+/* Prevent overflow issues */
+.canvas-container, .answer-container {
+    overflow: hidden;
+}
+
+/* Smooth transitions */
+.canvas-section, .answer-section {
+    transition: all 0.3s ease;
+}
+
+/* Mobile Layout Fixes */
+@media (max-width: 767.98px) {
+    .main-content-wrapper {
+        height: 100%;
+        padding: 0.5rem;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .canvas-section {
+        height: 60vh;
+        min-height: auto;
+        margin-bottom: 0.5rem;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .canvas-container {
+        padding: 0;
+        touch-action: none;
+    }
+
+    #canvas {
+        max-width: none;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        border-radius: 0;
+    }
+
+    .answer-section {
+        height: calc(40vh - 1rem);
+        max-height: none;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .answer-container {
+        height: 100%;
+        margin: 0;
+    }
+
+    .answer-container .card {
+        height: 100%;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .answer-container .card-body {
+        flex: 1;
+        overflow-y: auto;
+    }
+
+    /* Toolbox adjustments */
+    .toolbox-panel {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: auto;
+        max-height: 60vh;
+        transform: translateY(calc(100% - 40px));
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(12px);
+        border-radius: 20px 20px 0 0;
+        z-index: 1000;
+    }
+
+    .toolbox-panel.open {
+        transform: translateY(0);
+    }
+
+    .toolbox-handle {
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.98);
+        border-radius: 20px 20px 0 0;
+    }
+
+    .toolbox-handle::after {
+        content: '';
+        width: 40px;
+        height: 4px;
+        background: #cbd5e1;
+        border-radius: 2px;
+    }
+
+    /* Quick tools positioning */
+    .quick-tools-container {
+        position: fixed;
+        bottom: calc(60vh + 8px);
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1001;
+    }
+
+    .quick-tools {
+        padding: 8px;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(8px);
+    }
+
+    .quick-tool-btn {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* Small screen optimizations */
+@media (max-width: 350px) {
+    .canvas-section {
+        height: 50vh;
+    }
+
+    .answer-section {
+        height: calc(50vh - 1rem);
+    }
+
+    .quick-tools {
+        padding: 6px;
+        gap: 6px;
+    }
+
+    .quick-tool-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Safe area insets for modern mobile devices */
+@supports (padding: max(0px)) {
+    .toolbox-panel {
+        padding-bottom: max(env(safe-area-inset-bottom), 20px);
+    }
+
+    .quick-tools-container {
+        bottom: max(calc(60vh + 8px), calc(env(safe-area-inset-bottom) + 60vh));
+    }
+}
+
+/* Quick Tools - Updated Positioning */
+.quick-tools-container {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    width: auto;
+    pointer-events: none; /* Allow clicks to pass through container */
+}
+
+.quick-tools {
+    display: flex;
+    gap: 8px;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(8px);
+    border-radius: 50px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    pointer-events: all; /* Re-enable clicks for buttons */
+}
+
+.quick-tool-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    color: #4b5563;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+/* Mobile Optimization */
+@media (max-width: 767.98px) {
+    .canvas-section {
+        position: relative; /* Ensure positioning context */
+    }
+    
+    .quick-tools-container {
+        bottom: 12px;
+    }
+    
+    .quick-tools {
+        padding: 6px;
+        gap: 6px;
+    }
+    
+    .quick-tool-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Custom Color Picker */
+.custom-color-btn {
+    position: relative;
+    width: 24px;  /* Increased from 24px */
+    height: 24px; /* Increased from 24px */
+    padding: 0;
+    border: 2px solid #ffffff;
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f5f5f5 ;
+}
+
+.custom-color-icon {
+    position: absolute;
+    width: 18px;    /* Increased from 12px */
+    height: 18px;   /* Increased from 12px */
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.custom-color-input {
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    width: 30px;    /* Increased from 30px */
+    height: 30px;   /* Increased from 30px */
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+/* For Firefox */
+.custom-color-input::-moz-color-swatch {
+    border: none;
+    border-radius: 4px;
+}
+
+/* Active state for custom color picker */
+.custom-color-btn.active {
+    border-color: #ffffff;
+    box-shadow: 0 0 0 2px #3b82f6;
+}
+
+/* Menu Button Styles */
+.menu-btn {
+    display: none;
+    position: fixed;
+    left: 20px;
+    top: 85px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: none;
+    z-index: 1001;
+    cursor: pointer;
+    padding: 8px;
+}
+
+.menu-btn span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: #333;
+    margin: 4px auto;
+    transition: all 0.3s ease;
+}
+
+.menu-btn.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-btn.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-btn.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Hamburger Menu Button */
+.hamburger-menu {
+    position: fixed;
+    left: 20px;
+    top: calc(var(--nav-height) + 10px);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1002;
+    display: none;
+    cursor: pointer;
+    padding: 8px;
+}
+
+.hamburger-menu span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #333;
+    margin: 4px auto;
+    transition: all 0.3s ease;
+}
+
+.hamburger-menu.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger-menu.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-menu.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+@media (max-width: 768px) {
+    .hamburger-menu {
+        display: block;
+    }
+}
+
+/* Hamburger Menu Styles */
+.hamburger-menu {
+    position: fixed;
+    left: 20px;
+    top: calc(var(--nav-height) + 10px);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1002;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.hamburger-menu span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #333;
+    margin: 2px 0;
+    transition: all 0.3s ease;
+    transform-origin: center;
+}
+
+.hamburger-menu.active span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+}
+
+.hamburger-menu.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-menu.active span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+}
+
+/* Toolbox Panel Styles */
+.toolbox-panel {
+    position: fixed;
+    left: 0;
+    top: var(--nav-height);
+    height: calc(100vh - var(--nav-height));
+    width: 280px;
+    background: var(--bg-secondary);
+    border-right: 1px solid #e5e7eb;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1001;
+    overflow-y: auto;
+    box-shadow: 4px 0 12px rgba(0, 0, 0, 0.08);
+}
+
+.toolbox-panel.collapsed {
+    transform: translateX(-100%);
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+    .toolbox-panel {
+        padding-top: 1rem;
+    }
+    
+    .main-content {
+        margin-left: 280px;
+        transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .main-content.expanded {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 767px) {
+    .toolbox-panel {
+        width: 100%;
+        max-width: 100%;
+        border-radius: 20px 20px 0 0;
+        height: 60vh;
+        top: auto;
+        bottom: 0;
+        transform: translateY(calc(100% - 40px));
+    }
+
+    .toolbox-panel.collapsed {
+        transform: translateY(100%);
+    }
+
+    .toolbox-panel.expanded {
+        transform: translateY(0);
+    }
+
+    .hamburger-menu {
+        bottom: 20px;
+        top: auto;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+/* Add dark mode toggle button styles */
+.theme-toggle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+:root[data-theme="dark"] .theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.theme-toggle i {
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="dark"] .theme-toggle i {
+    transform: rotate(360deg) scale(0.9);
+}
+
+/* Canvas Controls */
+.canvas-controls {
+    padding: 0.5rem;
+}
+
+.canvas-controls .btn-group {
+    display: flex;
+    gap: 4px;
+}
+
+.canvas-controls .btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.375rem;
+}
+
+.tool-btn[data-tool="pan"] {
+    width: 100%;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--text-primary);
+}
+
+.tool-btn[data-tool="pan"].active {
+    background: var(--primary-color);
+    color: white;
+}
+
+.tool-btn[data-tool="pan"] i {
+    font-size: 1.1rem;
+}
+
+/* Floating Tools Styles */
+.floating-tools {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    border-radius: 50px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    max-width: calc(100% - 40px);
+}
+
+/* Update Mobile Responsiveness */
+@media (max-width: 768px) {
+    .floating-tools {
+        top: auto;
+        bottom: 20px;
+        right: 50%;
+        transform: translateX(50%);
+        padding: 6px;
+        gap: 6px;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        max-width: 90%;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; /* Firefox */
+    }
+
+    .floating-tools::-webkit-scrollbar {
+        display: none; /* Chrome, Safari */
+    }
+
+    .floating-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 0.9rem;
+        flex: 0 0 auto;
+    }
+
+    .floating-divider {
+        height: 24px;
+        flex: 0 0 auto;
+    }
+}
+
+.floating-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    color: #4b5563;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+.floating-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.floating-btn:active {
+    transform: scale(0.95);
+}
+
+.floating-btn.danger {
+    color: #dc2626;
+}
+
+.floating-btn.danger:hover {
+    background: #fee2e2;
+}
+
+.floating-btn.primary {
+    color: #2563eb;
+}
+
+.floating-btn.primary:hover {
+    background: #dbeafe;
+}
+
+.floating-divider {
+    width: 1px;
+    background: #e5e7eb;
+    margin: 0 4px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .floating-tools {
+        top: auto;
+        bottom: 20px;
+        right: 50%;
+        transform: translateX(50%);
+        padding: 6px;
+        gap: 6px;
+    }
+
+    .floating-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+    }
+}
+
+/* Insert Tools Container - New Position */
+.insert-tools-container {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    border-radius: 50px;
+    padding: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    display: flex;
+    gap: 8px;
+}
+
+.insert-tool-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    color: #4b5563;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+.insert-tool-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.insert-tool-btn:active {
+    transform: scale(0.95);
+}
+
+.insert-tool-btn.active {
+    background: #dbeafe;
+    color: #2563eb;
+}
+
+/* Text Options Popup */
+.text-options-popup {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 20px; /* Changed from left to right */
+    background: white;
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    min-width: 200px;
+    z-index: 1001;
+    display: none;
+}
+
+.text-options-popup.show {
+    display: block;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .insert-tools-container {
+        left: 16px;
+        top: 16px;
+        padding: 6px;
+    }
+
+    .insert-tool-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+    }
+
+    .text-options-popup {
+        position: fixed;
+        left: 50%;
+        bottom: 20px;
+        top: auto;
+        transform: translateX(-50%);
+        width: calc(100% - 32px);
+        max-width: 300px;
+    }
+}
+
+/* Canvas Controls - Updated Position */
+.canvas-controls {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    gap: 8px;
+    padding: 8px;
+    background: var(--toolbar-bg);
+    backdrop-filter: blur(8px);
+    border-radius: 50px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+}
+
+.control-group {
+    display: flex;
+    gap: 8px;
+}
+
+.control-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    color: #4b5563;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+.control-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.control-btn:active {
+    transform: scale(0.95);
+}
+
+.control-btn[data-tool="pan"].active {
+    background: #dbeafe;
+    color: #2563eb;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .canvas-controls {
+        bottom: 16px;
+        left: 16px;
+        padding: 6px;
+    }
+
+    .control-group {
+        gap: 6px;
+    }
+
+    .control-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+    }
+}
+
+/* Tool Settings Popup - Updated for left side positioning */
+.tool-settings-popup {
+    position: absolute;
+    top: 0;
+    left: calc(100% + 16px); /* Changed: position to RIGHT of tools instead of left */
+    width: 280px;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    z-index: 1200; /* Increased z-index to ensure it's above other elements */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-20px);
+    transition: all 0.3s ease;
+}
+
+.tool-settings-popup.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+/* Arrow pointing to pencil tool */
+.tool-settings-popup::before {
+    content: '';
+    position: absolute;
+    left: -10px; /* Changed: arrow points from left side */
+    top: 20px;
+    border-right: 10px solid var(--bg-secondary); /* Changed: arrow points left */
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .tool-settings-popup {
+        position: fixed;
+        left: 16px;
+        right: 16px;
+        bottom: 80px;
+        top: auto;
+        width: auto;
+        transform: translateY(20px);
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .tool-settings-popup.show {
+        transform: translateY(0);
+    }
+
+    .tool-settings-popup::before {
+        display: none;
+    }
+}
+
+/* Tool Settings Popup - New Styling */
+.tool-settings-popup {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(-100%, -50%);
+    width: 260px;
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1100;
+}
+
+.tool-settings-popup.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translate(-10px, -50%);
+}
+
+/* Settings Content */
+.settings-content {
+    background: white;
+    border-radius: 8px;
+}
+
+.settings-content h2 {
+    color: #1f2937;
+    font-size: 0.875rem;
+}
+
+/* Color Palette */
+.color-palette {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.color-picker-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.color-picker-btn:hover {
+    transform: scale(1.1);
+}
+
+.color-picker-btn.active {
+    border-color: #3b82f6;
+}
+
+/* Range Inputs */
+.form-range {
+    width: 100%;
+    height: 4px;
+    background: #e5e7eb;
+    border-radius: 2px;
+    -webkit-appearance: none;
+}
+
+.form-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background: #3b82f6;
+    border: 2px solid white;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Arrow pointing to canvas */
+.tool-settings-popup::after {
+    content: '';
+    position: absolute;
+    right: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-left: 8px solid white;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .tool-settings-popup {
+        position: fixed;
+        left: 16px;
+        right: 16px;
+        bottom: 80px;
+        top: auto;
+        width: auto;
+        max-width: 400px;
+        margin: 0 auto;
+        transform: translateY(20px);
+    }
+
+    .tool-settings-popup.show {
+        transform: translateY(0);
+    }
+
+    .tool-settings-popup::after {
+        display: none;
+    }
+}
+
+/* Tool Settings Popup - Fixed Positioning */
+.tool-settings-popup {
+    position: fixed; /* Changed from absolute to fixed */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95); /* Center and add scale */
+    width: 280px;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    z-index: 9999; /* Highest z-index */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.tool-settings-popup.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: auto;
+}
+
+/* Settings Content */
+.settings-content {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    position: relative; /* Added position relative */
+    z-index: 10000; /* Even higher z-index */
+}
+
+/* Remove the arrow since we're centering the popup */
+.tool-settings-popup::before,
+.tool-settings-popup::after {
+    display: none;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .tool-settings-popup {
+        width: calc(100% - 32px);
+        max-width: 400px;
+        margin: 0 auto;
+    }
+}
+
+/* ...existing code... */
+
+.floating-tools .tool-btn.floating-btn {
+    /* Inherit floating-btn styles while keeping tool-btn functionality */
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+    color: #4b5563;
+}
+
+.floating-tools .tool-btn.floating-btn.active {
+    background: #dbeafe;
+    color: #2563eb;
+    transform: scale(0.95);
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .floating-tools .tool-btn.floating-btn {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+/* Remove hamburger menu styles */
+.hamburger-menu,
+.toolbox-panel,
+.toolbox-handle,
+.menu-btn {
+    display: none !important;
+}
+
+/* Update tool settings popup positioning */
+.tool-settings-popup {
+    position: absolute;
+    top: 0;
+    left: calc(100% + 16px); /* Changed: position to RIGHT of tools instead of left */
+    width: 280px;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    z-index: 1200; /* Increased z-index to ensure it's above other elements */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-20px);
+    transition: all 0.3s ease;
+}
+
+.tool-settings-popup.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+/* Color palette styling */
+.color-palette {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.color-picker-btn {
+    width: 32px;
+    height: 32px;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.color-picker-btn:hover {
+    transform: scale(1.1);
+}
+
+.color-picker-btn.active {
+    border-color: #3b82f6;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .tool-settings-popup {
+        position: fixed;
+        left: 16px;
+        right: 16px;
+        bottom: 80px;
+        top: auto;
+        width: auto;
+        transform: translateY(20px);
+    }
+
+    .tool-settings-popup.show {
+        transform: translateY(0);
+    }
+}
+
+/* ...existing code... */
+
+/* ...existing code... */
+
+.tool-settings-popup {
+    position: absolute;
+    width: 280px;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    z-index: 1200;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tool-settings-popup.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+    .tool-settings-popup {
+        position: fixed;
+        width: calc(100% - 32px);
+        max-width: 400px;
+        margin: 0 auto;
+        left: 50%;
+        bottom: 100px;
+        transform: translateX(-50%);
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(8px);
+    }
+}
+
+/* Replace popup with inline tool settings */
+.tool-settings {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 280px;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+}
+
+.tool-settings .settings-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.tool-settings .color-palette {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+    .tool-settings {
+        position: fixed;
+        right: 16px;
+        top: auto;
+        bottom: 100px;
+        width: auto;
+        max-width: 280px;
+    }
+}
+
+/* Remove old tool settings popup styles */
+.tool-settings-popup,
+.tool-settings-popup::before,
+.tool-settings-popup::after {
+    display: none;
+}
+
+/* Tool Settings Panel - Left Side */
+.tool-settings {
+    position: fixed;
+    left: 0;
+    top: var(--nav-height);
+    width: 280px;
+    height: calc(100vh - var(--nav-height));
+    background: var(--bg-secondary);
+    border-right: 1px solid var(--border-color);
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1001;
+    box-shadow: 4px 0 12px rgba(0, 0, 0, 0.08);
+    overflow-y: auto;
+}
+
+.tool-settings.show {
+    transform: translateX(0);
+}
+
+/* Hamburger Button */
+.settings-toggle {
+    position: fixed;
+    left: 20px;
+    top: calc(var(--nav-height) + 20px);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1002;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.settings-toggle span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--text-primary);
+    margin: 2px 0;
+    transition: all 0.3s ease;
+    transform-origin: center;
+}
+
+.settings-toggle.active span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+}
+
+.settings-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.settings-toggle.active span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .tool-settings {
+        width: 100%;
+        max-width: 320px;
+    }
+    
+    .settings-toggle {
+        left: 16px;
+        top: calc(var(--nav-height) + 16px);
+    }
+}
+
+/* ...existing code... */
+
+/* Tool Settings Panel with Hamburger */
+.settings-toggle {
+    position: fixed;
+    left: 20px;
+    top: calc(var(--nav-height) + 20px);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1002;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.settings-toggle span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--text-primary);
+    margin: 2px 0;
+    transition: all 0.3s ease;
+}
+
+.settings-toggle.active span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+}
+
+.settings-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.settings-toggle.active span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+}
+
+.tool-settings {
+    position: fixed;
+    left: 0;
+    top: var(--nav-height);
+    width: 280px;
+    height: calc(100vh - var(--nav-height));
+    background: var(--bg-secondary);
+    border-right: 1px solid var(--border-color);
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1001;
+    box-shadow: 4px 0 12px rgba(0, 0, 0, 0.08);
+    overflow-y: auto;
+}
+
+.tool-settings.show {
+    transform: translateX(0);
+}
+
+.settings-header {
+    padding: 16px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.settings-header h6 {
+    margin: 0;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.settings-content {
+    padding: 16px;
+}
+
+.tool-section {
+    margin-bottom: 24px;
+}
+
+.section-label {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+.color-palette {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.color-picker-btn {
+    width: 40px;
+    height: 40px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.color-picker-btn:hover {
+    transform: scale(1.1);
+}
+
+.color-picker-btn.active {
+    border-color: var(--primary-color);
+}
+
+.color-picker-custom {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f8fafc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.color-picker-custom input[type="color"] {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.color-picker-custom i {
+    color: var(--text-secondary);
+    font-size: 1.25rem;
+    pointer-events: none;
+}
+
+.size-value,
+.opacity-value {
+    min-width: 3ch;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .tool-settings {
+        width: 100%;
+        max-width: 320px;
+    }
+    
+    .settings-toggle {
+        left: 16px;
+        top: calc(var(--nav-height) + 16px);
+    }
+}
+
+/* ...existing code... */
+
+/* Improve Tool Settings Panel */
+.tool-settings {
+    position: fixed;
+    left: 0;
+    top: var(--nav-height);
+    width: 280px;
+    height: calc(100vh - var(--nav-height));
+    background: var(--bg-secondary);
+    border-right: 1px solid var(--border-color);
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1001;
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+.tool-settings.show {
+    transform: translateX(0);
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Enhance Hamburger Button */
+.settings-toggle {
+    position: fixed;
+    left: 16px;
+    top: calc(var(--nav-height) + 16px);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1002;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+.settings-toggle span {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background: var(--text-primary);
+    transition: all 0.3s ease;
+    transform-origin: center;
+}
+
+.settings-toggle.active {
+    background: var(--primary-color);
+}
+
+.settings-toggle.active span {
+    background: white;
+}
+
+.settings-toggle.active span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+}
+
+.settings-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.settings-toggle.active span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+}
+
+/* Improve Canvas Container */
+.canvas-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+#canvas {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4/3;
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: crosshair;
+    touch-action: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .tool-settings {
+        width: 100%;
+        max-width: 320px;
+    }
+    
+    .canvas-container {
+        border-radius: 0;
+        box-shadow: none;
+    }
+    
+    #canvas {
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+    }
+    
+    .settings-toggle {
+        left: 12px;
+        top: calc(var(--nav-height) + 12px);
+    }
+}
+
+/* Update navbar */
+.navbar {
+    background-color: var(--bg-primary);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 1px 2px var(--shadow-color);
+}
+
+/* Update tool settings */
+.tool-settings {
+    background-color: var(--bg-secondary);
+    border-right: 1px solid var(--border-color);
+}
+
+/* Update buttons */
+.floating-btn, .control-btn {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+.floating-btn:hover, .control-btn:hover {
+    background: var(--highlight-color);
+    border-color: var(--highlight-border);
+}
+
+.floating-btn.active, .control-btn.active {
+    background: var(--highlight-color);
+    color: var (--primary-color);
+    border-color: var(--highlight-border);
+}
+
+/* Update card styles */
+.card {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+}
+
+.card-header {
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* ...existing code... */
+
+/* Clean up conflicting toolbox styles */
+.toolbox-panel {
+    display: none !important;
+}
+
+/* Tool Settings Panel */
+.tool-settings {
+    position: fixed;
+    left: 0;
+    top: var(--nav-height);
+    width: 280px;
+    height: calc(100vh - var(--nav-height));
+    background: var(--bg-secondary);
+    border-right: 1px solid var(--border-color);
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1001;
+    overflow-y: auto;
+    padding: 1rem;
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.1);
+}
+
+.tool-settings.show {
+    transform: translateX(0);
+}
+
+/* Settings Toggle Button */
+.settings-toggle {
+    position: fixed;
+    left: 16px;
+    top: calc(var(--nav-height) + 16px);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1002;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+.settings-toggle:hover {
+    background: var(--highlight-color);
+}
+
+.settings-toggle span {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background: var(--text-primary);
+    transition: all 0.3s ease;
+    transform-origin: center;
+}
+
+.settings-toggle.active {
+    background: var(--primary-color);
+}
+
+.settings-toggle.active span {
+    background: white;
+}
+
+.settings-toggle.active span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+}
+
+.settings-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.settings-toggle.active span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+}
+
+/* Tool Section Styling */
+.tool-section {
+    background: var(--bg-primary);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    border: 1px solid var(--border-color);
+}
+
+.section-label {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    margin-bottom: 8px;
+    display: block;
+}
+
+/* Color Palette */
+.color-palette {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.color-picker-btn {
+    width: 36px;
+    height: 36px;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.color-picker-btn:hover {
+    transform: scale(1.1);
+}
+
+.color-picker-btn.active {
+    border-color: var(--primary-color);
+}
+
+/* Range Input Styling */
+.form-range {
+    width: 100%;
+    margin: 8px 0;
+}
+
+.size-value,
+.opacity-value {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    min-width: 2.5ch;
+    text-align: right;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .tool-settings {
+        width: 100%;
+        max-width: 320px;
+    }
+    
+    .settings-toggle {
+        left: 12px;
+        top: calc(var(--nav-height) + 12px);
+    }
+    
+    .color-picker-btn {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+/* Tool Settings Panel */
+.tool-settings {
+    position: fixed;
+    left: 0;
+    top: var(--nav-height);
+    width: 280px;
+    height: calc(100vh - var(--nav-height));
+    background: var(--bg-secondary);
+    border-right: 1px solid var(--border-color);
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1001;
+    overflow-y: auto;
+    padding: 1.5rem;
+}
+
+.tool-settings.show {
+    transform: translateX(0);
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Tool Sections */
+.tool-section {
+    background: var(--bg-primary);
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border-color);
+}
+
+.section-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.section-title i {
+    font-size: 1.1em;
+    color: var(--primary-color);
+}
+
+/* Drawing Tools Grid */
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Tool Button Styles */
+.tool-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: white;
+    color: var(--text-primary);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tool-btn:hover {
+    background: var(--highlight-color);
+    border-color: var(--highlight-border);
+}
+
+.tool-btn.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .tool-settings {
+        width: 100%;
+        max-width: 320px;
+    }
+}
+
+/* Tools Toggle Button */
+.tools-toggle {
+    position: fixed;
+    left: 1rem;
+    top: calc(var(--nav-height) + 1rem);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1002;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.3s ease;
+}
+
+.tools-toggle span {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background: var(--text-primary);
+    transition: transform 0.3s ease;
+    transform-origin: center;
+}
+
+.tools-toggle.active {
+    background: var(--primary-color);
+}
+
+.tools-toggle.active span {
+    background: white;
+}
+
+.tools-toggle.active span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+}
+
+.tools-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.tools-toggle.active span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+}
+
+/* Tools Panel */
+.tools-panel {
+    position: fixed;
+    left: 0;
+    top: var(--nav-height);
+    width: 280px;
+    height: calc(100vh - var(--nav-height));
+    background: var(--bg-secondary);
+    border-right: 1px solid var(--border-color);
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1001;
+    overflow-y: auto;
+    padding: 1.5rem;
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.1);
+}
+
+.tools-panel.show {
+    transform: translateX(0);
+}
+
+/* Tools Sections */
+.tools-section {
+    background: var (--bg-primary);
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border-color);
+}
+
+/* Section Titles */
+.section-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.section-title i {
+    color: var(--primary-color);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .tools-panel {
+        width: 100%;
+        max-width: 320px;
+    }
+    
+    .tools-toggle {
+        left: 0.75rem;
+        top: calc(var(--nav-height) + 0.75rem);
+    }
+}
+
+/* Remove old panel styles */
+.tool-settings,
+.toolbox-panel,
+.settings-toggle,
+.hamburger-menu {
+    display: none !important;
+}
+
+/* Update Tools Panel styles */
+.tools-panel {
+    position: fixed;
+    left: 0;
+    top: var(--nav-height);
+    width: 280px;
+    height: calc(100vh - var(--nav-height));
+    background: var(--bg-secondary);
+    border-right: 1px solid var(--border-color);
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1001;
+    overflow-y: auto;
+    padding: 1.5rem;
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.1);
+}
+
+.tools-panel.show {
+    transform: translateX(0);
+}
+
+/* Update Tools Toggle Button */
+.tools-toggle {
+    position: fixed;
+    left: 1rem;
+    top: calc(var(--nav-height) + 1rem);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--bg-primary);
+    border: 1px solid var (--border-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1002;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+/* ...rest of existing code... */

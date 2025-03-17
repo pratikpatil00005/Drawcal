@@ -1,0 +1,318 @@
+:root {
+    --header-height: 56px;
+    --footer-height: 40px;
+    --tools-width: 240px;
+    --border-color: #dee2e6;
+}
+
+/* Core Layout */
+.app-layout {
+    display: grid;
+    height: 100vh;
+    grid-template-rows: auto 1fr auto;
+    overflow: hidden;
+}
+
+/* Main Content */
+.main-content {
+    display: grid;
+    grid-template-columns: var(--tools-width) 1fr;
+    overflow: hidden;
+    min-height: calc(100vh - var(--navbar-height) - var(--footer-height));
+}
+
+/* Tools Panel */
+.tools-panel {
+    padding: 1rem;
+    background: white;
+    border-right: 1px solid var(--border-color);
+    overflow-y: auto;
+}
+
+/* Canvas Area */
+.canvas-area {
+    position: relative;
+    overflow: hidden;
+}
+
+#canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+}
+
+/* Tool Controls */
+.tool-controls {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.tool-btn {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--border-color);
+    border-radius: 0.25rem;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.tool-btn.active {
+    background: #e9ecef;
+    border-color: #0d6efd;
+}
+
+/* Core layout styles */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.app-navbar {
+    height: 56px;
+    flex-shrink: 0;
+    background: white;
+    border-bottom: 1px solid #dee2e6;
+    z-index: 1000;
+}
+
+.app-main {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+}
+
+.tools-sidebar {
+    width: 240px;
+    flex-shrink: 0;
+    background: white;
+    border-right: 1px solid #dee2e6;
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+.canvas-wrapper {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    background: #f8f9fa;
+}
+
+.answer-panel {
+    height: 300px;
+    flex-shrink: 0;
+    background: white;
+    border-top: 1px solid #dee2e6;
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+.app-footer {
+    height: 40px;
+    flex-shrink: 0;
+    background: white;
+    border-top: 1px solid #dee2e6;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.footer-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.footer-right {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.footer-text {
+    color: #6c757d;
+    font-size: 0.875rem;
+    margin: 0;
+}
+
+.footer-link {
+    color: #6c757d;
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+    color: #0d6efd;
+}
+
+/* Tool styles */
+.tools-sidebar .tool-btn {
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    background: white;
+    cursor: pointer;
+}
+
+.tools-sidebar .tool-btn.active {
+    background: #e9ecef;
+    border-color: #0d6efd;
+}
+
+/* Canvas specific styles */
+#canvas.eraser { cursor: url('data:image/svg+xml;utf8,<svg...>') 10 10, auto; }
+/* ...other cursor styles... */
+
+.canvas-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.horizontal-tools {
+    display: flex;
+    gap: 1rem;
+    padding: 0.5rem;
+    background: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+}
+
+.tool-group {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    padding: 0.25rem 0.5rem;
+    border-right: 1px solid #dee2e6;
+}
+
+.tool-group:last-child {
+    border-right: none;
+}
+
+.tool-option {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.tool-option label {
+    font-size: 0.75rem;
+    color: #6c757d;
+    margin-bottom: 0;
+}
+
+/* Custom range input styling */
+.form-range-sm {
+    width: 80px;
+    height: 4px;
+}
+
+/* Custom color picker styling */
+.form-control-color {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border-radius: 4px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .horizontal-tools {
+        padding: 0.25rem;
+        gap: 0.5rem;
+    }
+
+    .tool-group {
+        padding: 0.25rem;
+        gap: 0.5rem;
+    }
+}
+
+/* Responsive footer adjustments */
+@media (max-width: 768px) {
+    .app-footer {
+        flex-direction: column;
+        height: auto;
+        padding: 0.75rem;
+        gap: 0.5rem;
+        text-align: center;
+    }
+
+    .footer-left,
+    .footer-right {
+        justify-content: center;
+    }
+}
+
+/* Update container fluid to remove default padding */
+.container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* Ensure the toolbox panel has a fixed width and proper scrolling */
+.toolbox-panel {
+    width: 256px; /* 16rem */
+    height: calc(100vh - var(--navbar-height) - var(--footer-height));
+    overflow-y: auto;
+    position: sticky;
+    top: var(--navbar-height);
+}
+
+/* Add custom scrollbar for toolbox */
+.toolbox-panel::-webkit-scrollbar {
+    width: 6px;
+}
+
+.toolbox-panel::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.toolbox-panel::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+}
+
+.toolbox-panel::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+#canvas {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4/3;
+    background-color: white;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    touch-action: none;
+}
+
+@media (max-width: 768px) {
+    #canvas {
+        aspect-ratio: 1/1;
+    }
+}

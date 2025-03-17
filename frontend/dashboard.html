@@ -1,0 +1,354 @@
+<!-- Main Canvas DashBoard -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="icon" type="image/png" href="images/logo1.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/navbar.css">
+    <link rel="stylesheet" href="styles/canvas.css">
+    <link rel="stylesheet" href="styles/tools.css">
+    <link rel="stylesheet" href="styles/answer-container.css">
+    <link rel="stylesheet" href="styles/footer.css">
+    <link rel="stylesheet" href="styles/theme.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <title>DrawCal</title>
+</head>
+
+<body>
+    <div class="page-container">
+        <!-- Fixed Navbar -->
+        <nav class="navbar navbar-expand-lg fixed-top">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" href="/">
+                    <img src="images/logo1.png" alt="DrawCal Logo" height="30" class="me-2">
+                    <span>DrawCal</span>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-center gap-2">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="dashboard.html">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">About</a>
+                        </li>
+                        <li class="nav-item d-flex align-items-center">
+                            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                                <i class="bi bi-sun-fill"></i>
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <div class="vr d-none d-lg-block mx-2 my-1"></div>
+                        </li>
+                        <li class="nav-item" id="userProfile">
+                            <div class="d-flex align-items-center gap-2">
+                                <img id="userAvatar" src="" alt="User Avatar" class="rounded-circle" width="32" height="32">
+                                <span id="userName" class="d-none d-md-inline"></span>
+                                <div class="dropdown">
+                                    <button class="btn btn-link p-0" type="button" data-bs-toggle="dropdown">
+                                        <i class="bi bi-three-dots-vertical"></i>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li><button id="signOutButton" class="dropdown-item">Sign Out</button></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container-fluid h-100">
+            <div class="row min-vh-100">
+                <div class="col px-0">
+                    <button id="toolsToggle" class="tools-toggle" aria-label="Toggle drawing tools">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+
+                    <!-- Tools Panel -->
+                    <div id="toolsPanel" class="tools-panel">
+                        <div class="tools-content">
+                            <!-- Color and Size Section -->
+                            <div class="tools-section">
+                                <h3 class="section-title">
+                                    <i class="bi bi-palette"></i>
+                                    Colors & Size
+                                </h3>
+                                <div class="color-palette mb-3">
+                                    <button class="color-picker-btn active" data-color="#000000" style="background: #000000"></button>
+                                    <button class="color-picker-btn" data-color="#ef4444" style="background: #ef4444"></button>
+                                    <button class="color-picker-btn" data-color="#22c55e" style="background: #22c55e"></button>
+                                    <button class="color-picker-btn" data-color="#3b82f6" style="background: #3b82f6"></button>
+                                    <button class="color-picker-btn custom-color">
+                                        <input type="color" id="customColorPicker" value="#000000">
+                                    </button>
+                                </div>
+                                <div class="control-group">
+                                    <label class="d-flex justify-content-between">
+                                        <span>Size</span>
+                                        <span id="brushSizeValue"></span>
+                                    </label>
+                                    <input type="range" class="form-range" id="brushSize" min="1" max="50" value="3">
+                                </div>
+                            </div> <!-- End tools-section -->
+
+                            <!-- Text Styling Section -->
+                            <div class="tools-section">
+                                <h3 class="section-title">
+                                    <i class="bi bi-type"></i>
+                                    Text Styling
+                                </h3>
+                                <div class="mb-3">
+                                    <label class="form-label">Font Family</label>
+                                    <select class="form-select" id="sidePanelFontFamily">
+                                        <option value="Arial">Arial</option>
+                                        <option value="Times New Roman">Times New Roman</option>
+                                        <option value="Courier New">Courier New</option>
+                                        <option value="Georgia">Georgia</option>
+                                        <option value="Verdana">Verdana</option>
+                                        <option value="Helvetica">Helvetica</option>
+                                        <option value="Tahoma">Tahoma</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Font Size</label>
+                                    <input type="number" class="form-control" id="sidePanelFontSize" 
+                                           value="16" min="8" max="72">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Opacity</label>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <input type="range" class="form-range" id="sidePanelOpacity" 
+                                               min="0" max="100" value="100">
+                                        <span id="sidePanelOpacityValue">100%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="main-content-wrapper">
+                        <!-- Canvas Container -->
+                        <div class="canvas-section">
+                            <div class="canvas-container" id="canvasContainer">
+                                <div id="canvasLoadingOverlay" class="position-absolute w-100 h-100 d-none">
+                                    <div class="d-flex justify-content-center align-items-center h-100">
+                                        <div class="spinner-border text-primary" role="status">
+                                            <span class="visually-hidden">Loading canvas...</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <canvas id="canvas" class="drawing-canvas"></canvas>
+                                <div class="floating-tools">
+                                    <!-- Drawing Tools -->
+                                    <button class="tool-btn floating-btn active" id="pencilTool" data-tool="pencil" title="Pencil">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="tool-btn floating-btn" data-tool="brush" title="Brush">
+                                        <i class="bi bi-brush"></i>
+                                    </button>
+                                    <button class="tool-btn floating-btn" data-tool="eraser" title="Eraser">
+                                        <i class="bi bi-eraser"></i>
+                                    </button>
+                                    <!-- Tool Settings Popup -->
+                                    <div class="tool-settings-popup" id="toolSettingsPopup">
+                                        <div class="settings-content">
+                                            <h6 class="mb-3">Tool Settings</h6>
+                                            <div class="mb-4">
+                                                <label class="form-label" for="mainBrushSize">Size</label>
+                                                <input type="range" class="form-range" id="mainBrushSize" min="1" max="50" value="3">
+                                                <span id="mainBrushSizeValue">3</span>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label" for="mainColorPicker">Color</label>
+                                                <input type="color" id="mainColorPicker" value="#000000">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Opacity</label>
+                                                <input type="range" class="form-range" id="opacityRange" min="0" max="100" value="100">
+                                                <span id="opacityValue">100%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="floating-divider"></div>
+                                    <!-- File Operations -->
+                                    <button class="floating-btn" id="newCanvas" title="New Canvas">
+                                        <i class="bi bi-file-earmark-plus"></i>
+                                    </button>
+                                    <button class="floating-btn" id="saveCanvas" title="Save">
+                                        <i class="bi bi-save"></i>
+                                    </button>
+                                    <button class="floating-btn" id="exportImage" title="Export">
+                                        <i class="bi bi-download"></i>
+                                    </button>
+                                    <div class="floating-divider"></div>
+                                    <!-- Add insert options here -->
+                                    <button class="floating-btn" data-tool="text" title="Add Text">
+                                        <i class="bi bi-type"></i>
+                                    </button>
+                                    <button class="floating-btn" id="insertImage" title="Insert Image">
+                                        <i class="bi bi-image"></i>
+                                    </button>
+                                    <div class="floating-divider"></div>
+                                    <button class="floating-btn" id="canvas-undo" title="Undo">
+                                        <i class="bi bi-arrow-counterclockwise"></i>
+                                    </button>
+                                    <button class="floating-btn" id="canvas-redo" title="Redo">
+                                        <i class="bi bi-arrow-clockwise"></i>
+                                    </button>
+                                    <button class="floating-btn danger" id="canvas-clear" title="Clear">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                    <button class="floating-btn primary" id="canvas-generate" title="Generate">
+                                            <i class="bi bi-lightning-charge-fill"></i>
+                                    </button>
+                                </div>
+
+                                <!-- Add new canvas-controls div at bottom left -->
+                                <div class="canvas-controls">
+                                    <div class="control-group">
+                                        <button class="control-btn" id="zoomIn" title="Zoom In">
+                                            <i class="bi bi-zoom-in"></i>
+                                        </button>
+                                        <button class="control-btn" id="zoomOut" title="Zoom Out">
+                                            <i class="bi bi-zoom-out"></i>
+                                        </button>
+                                        <button class="control-btn" id="resetView" title="Reset View">
+                                            <i class="bi bi-arrows-fullscreen"></i>
+                                        </button>
+                                        <button class="control-btn" data-tool="pan" title="Pan">
+                                            <i class="bi bi-arrows-move"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- Remove the insert-tools-container since we moved its functionality -->
+                                <!-- And keep the file input and text options but make them hidden initially -->
+                                <div class="d-none">
+                                    <div class="text-options-popup" id="textOptions">
+                                        <select class="form-select form-select-sm mb-2" id="fontFamily">
+                                            <option value="Arial">Arial</option>
+                                            <option value="Times New Roman">Times New Roman</option>
+                                            <option value="Courier New">Courier New</option>
+                                            <option value="Georgia">Georgia</option>
+                                            <option value="Verdana">Verdana</option>
+                                        </select>
+                                        <div class="d-flex gap-2">
+                                            <input type="number" class="form-control form-control-sm" id="fontSize" 
+                                                value="16" min="8" max="72">
+                                            <button class="btn btn-sm btn-outline-secondary" id="textColor">
+                                                <i class="bi bi-palette"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <input type="file" id="imageInput" accept="image/*" class="d-none">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tool Settings Panel -->
+                        <!-- Remove or comment out the old tool settings panel -->
+                        <!-- <div id="toolSettings" class="tool-settings">...</div> -->
+
+                        <!-- Answer Container -->
+                        <div class="answer-section">
+                            <div class="answer-container">
+                                <div class="card">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <div class="d-flex align-items-center">
+                                            <i class="bi bi-lightning-charge-fill me-2 "></i>
+                                            <span class="fw-semibold">Generated Answer</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="answer-loading" class="d-none">
+                                            <div class="spinner-border" role="status">
+                                                <span class="visually-hidden">Loading...</span>
+                                            </div>
+                                            <p class="mt-3">Analyzing your drawing...</p>
+                                        </div>
+                                        <div id="answer-content">
+                                            <p id="answer" class="mb-0"></p>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="d-flex align-items-center">
+                                            <i class="bi bi-info-circle text-primary me-2"></i>
+                                            <small>For best results, draw clearly and wait for processing to complete.</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Spacing -->
+        <div class="footer-spacing"></div>
+
+        <!-- Footer -->
+        <footer class="footer py-2 shadow-sm">
+            <div class="container">
+                <div class="row align-items-center g-2">
+                    <div class="col-md-4">
+                        <!-- Left column - empty for balance -->
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <small class="mb-0 text-muted">&copy; 2024 DrawCal. All rights reserved.</small>
+                    </div>
+                    <div class="col-md-4">
+                        <ul class="list-inline mb-0 social-links text-end">
+                            <li class="list-inline-item">
+                                <a href="https://github.com/pratikpatil00005" class="text-dark social-link" target="_blank"
+                                    title="GitHub">
+                                    <i class="bi bi-github small"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="https://instagram.com/pratik_patil0207" class="text-dark social-link"
+                                    target="_blank" title="Instagram">
+                                    <i class="bi bi-instagram small"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="https://twitter.com/yourusername" class="text-dark social-link" target="_blank"
+                                    title="Twitter">
+                                    <i class="bi bi-twitter small"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+
+    <!-- Scripts - Update order -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="scripts/theme.js"></script>  <!-- Move this before other scripts -->
+    <script src="scripts/navbar.js"></script>
+    <script src="scripts/canvas.js"></script> <!-- Suggested new file for canvas logic -->
+    <script src="scripts/app.js"></script>
+
+</body>
+</html>

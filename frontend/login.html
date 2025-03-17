@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page | DrawCal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+  <link rel="icon" type="image/png" href="images/logo1.png">
+  <link rel="stylesheet" href="styles/theme.css">
+  <link rel="stylesheet" href="styles/fonts.css">
+  <style>
+    body {
+      font-family: 'Excalifont', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-gray-900 flex items-center justify-center min-h-screen transition-colors" data-theme="light">
+  <div class="w-full max-w-sm p-6 bg-gray-800 rounded-lg shadow-md">
+    
+    <!-- Logo -->
+    <div class="flex justify-center mb-4">
+      <img src="images/logo1.png" alt="DrawCal Logo" class="w-12 h-12">
+    </div>
+
+    <!-- Title -->
+    <h1 class="text-3xl text-center text-blue-500 font-bold mb-2">DrawCal</h1>
+    <p class="text-center text-gray-400 mb-6">Only login via Google!</p>
+
+    <!-- Google Login Button -->
+    <form id="login-form">
+      <button type="button" class="w-full py-2 px-4 bg-white hover:bg-gray-50 border border-gray-300 rounded-md shadow-sm flex items-center justify-center space-x-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" onclick="handleGoogleLogin()">
+        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google logo" class="w-5 h-5">
+        <span class="text-gray-700 font-medium">Sign in with Google</span>
+      </button>
+    </form>
+
+    <!-- Placeholder for Terms -->
+    <div class="text-center mt-4">
+      <p class="text-gray-400 text-sm">
+        By logging in, you agree to our <a href="#" class="text-blue-500">terms and conditions</a>.
+      </p>
+    </div>
+  </div>
+
+  <script src="scripts/theme.js"></script>
+  <script>
+    // Example Google Login Handler
+    function handleGoogleLogin() {
+      alert("Google Login initiated.");
+      // Redirect to dashboard on successful login (mock)
+      window.location.href = "dashboard.html";
+    }
+
+    // Check system preference for initial theme
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.body.setAttribute('data-theme', 'dark');
+    }
+  </script>
+</body>
+</html>

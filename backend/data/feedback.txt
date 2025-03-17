@@ -1,0 +1,28 @@
+
+=== Feedback Entry ===
+Date: 2025-02-09T07:33:58.714Z
+Name: Pratik Patil
+Email: pratikpatil00004@gmail.com
+Type: bug
+Message: hii
+
+==================
+
+
+=== Feedback Entry ===
+Date: 2025-02-09T07:34:43.520Z
+Name: atharva pawar
+Email: atharvapawar1212@gmail.com
+Type: compliment
+Message: nice work
+==================
+
+
+=== Feedback Entry ===
+Date: 2025-02-27T06:33:06.878Z
+Name: Pratik Patil
+Email: pratikpatil00004@gmail.com
+Type: suggestion
+Message: sdsds
+==================
+
