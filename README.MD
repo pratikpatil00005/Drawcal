@@ -1,4 +1,4 @@
-# DrawCal 2
+# DrawCal 
 
 A web-based drawing and calculation application that combines canvas-based drawing with computational capabilities.
 
